@@ -15,13 +15,51 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: kLighterWhite,
-          body: HomeScreen(),
+          body: const HomeScreen(),
+          bottomNavigationBar: SizedBox(
+            height: 82,
+            child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: kWhite,
+                currentIndex: _selectedIndex,
+                selectedItemColor: kBlue,
+                onTap: _onItemTapped,
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.home,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.book_outlined,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.notifications,
+                      ),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.person_3_outlined,
+                      ),
+                      label: ''),
+                ]),
+          ),
         ));
   }
 }
@@ -38,20 +76,132 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         children: [
           header(),
-          const SizedBox(height: 30),
+          hSizedBox(30.00),
           search(),
-          const SizedBox(height: 15),
+          hSizedBox(15.00),
           tags(),
-          const SizedBox(height: 30),
+          hSizedBox(25.00),
           destinationList(),
+          hSizedBox(25.00),
+          shareWihYou(),
+          hSizedBox(15.00),
+          shareList()
         ],
       ),
     );
   }
 
+  SizedBox shareList() {
+    return SizedBox(
+      height: 88,
+      child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (ctx, index) {
+            return Container(
+              padding: const EdgeInsets.all(9),
+              margin: const EdgeInsets.only(right: 20),
+              width: 208,
+              height: 88,
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.circular(kBorderRadius),
+                boxShadow: [
+                  BoxShadow(
+                    color: kDarkBlue.withOpacity(0.051),
+                    offset: const Offset(0.0, 3.0),
+                    blurRadius: 24.0,
+                    spreadRadius: 0.0,
+                  )
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius),
+                      color: kLightBlue,
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://adoctor.org/wp-content/uploads/Tlemcen-123.jpg'),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.play_circle,
+                      color: kWhite,
+                    ),
+                  ),
+                  wSizedBox(12.0),
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Top Trading Islands in 2022',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: kPoppinsBold.copyWith(
+                            fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                          ),
+                        ),
+                        hSizedBox(5.0),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/view.svg',
+                              height: 18,
+                              width: 15,
+                              colorFilter: const ColorFilter.mode(
+                                  kGrey, BlendMode.srcIn),
+                            ),
+                            wSizedBox(4.0),
+                            Text(
+                              '40,999',
+                              style: kPoppinsMedium.copyWith(
+                                color: kGrey,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+    );
+  }
+
+  Row shareWihYou() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Short for you',
+          style: kPoppinsBold.copyWith(
+            fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
+          ),
+        ),
+        Text(
+          'View All',
+          style: kPoppinsMedium.copyWith(
+            color: kBlue,
+            fontSize: SizeConfig.blockSizeHorizontal! * 3,
+          ),
+        ),
+      ],
+    );
+  }
+
   SizedBox destinationList() {
     return SizedBox(
-      height: 305,
+      height: 304,
       child: ListView.builder(
         itemCount: 6,
         shrinkWrap: true,
@@ -59,6 +209,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (ctx, index) {
           return Container(
             padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(right: 20.0),
             height: 304,
             width: 255,
             decoration: BoxDecoration(
@@ -81,27 +232,78 @@ class HomeScreen extends StatelessWidget {
                     image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPsnQjsJ9HLBRH8ogWJl4RfuAqNo5qfYTaHA&usqp=CAU'))),
+                            'https://www.mafamillezen.com/w2018/wp-content/uploads/2022/02/voyage-famille-alger.jpg'))),
               ),
-              const SizedBox(
-                height: 18,
-              ),
+              const SizedBox(height: 18),
               Flexible(
                 child: Text(
-                  '111Bali, the heaven island of Indonesia, is attracting tourists not only by the beauty of tropical sea, but also by high waves and unique culture.',
+                  'Alger, Capital of Algeria, is attracting tourists not only by the beauty of tropical sea, but also by high waves and unique culture.',
                   style: kPoppinsBold.copyWith(
                     fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-              )
+              ),
+              hSizedBox(16.00),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 19,
+                        backgroundColor: kLightBlue,
+                        backgroundImage: NetworkImage(
+                            'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'),
+                      ),
+                      wSizedBox(12.00),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Abdelhak Mehda',
+                            style: kPoppinsBold.copyWith(
+                              fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                            ),
+                          ),
+                          Text(
+                            'April 18, 2023',
+                            style: kPoppinsRegular.copyWith(
+                              color: kGrey,
+                              fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 38,
+                    width: 38,
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius),
+                      color: kLightWhite,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/share.svg',
+                      colorFilter:
+                          const ColorFilter.mode(kLightBlue, BlendMode.srcIn),
+                    ),
+                  ),
+                ],
+              ),
             ]),
           );
         },
       ),
     );
   }
+
+  SizedBox hSizedBox(value) => SizedBox(height: value);
+  SizedBox wSizedBox(value) => SizedBox(width: value);
 
   SizedBox tags() {
     return SizedBox(
