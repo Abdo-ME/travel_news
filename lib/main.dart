@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: kLighterWhite,
-          body: const NewsDetails(),
+          body: const HomeScreen(),
           bottomNavigationBar: SizedBox(
             height: 82,
             child: BottomNavigationBar(

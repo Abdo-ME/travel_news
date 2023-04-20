@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'size_config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_news_app/app_styles.dart';
+import 'package:travel_news_app/screens/news_details.dart';
 import 'package:travel_news_app/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           hSizedBox(15.00),
           tags(),
           hSizedBox(25.00),
-          destinationList(),
+          destinationList(context),
           hSizedBox(25.00),
           shareWihYou(),
           hSizedBox(15.00),
@@ -140,105 +141,113 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SizedBox destinationList() {
-    return SizedBox(
-      height: 304,
-      child: ListView.builder(
-        itemCount: 6,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) {
-          return Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.only(right: 20.0),
-            height: 304,
-            width: 255,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kBorderRadius),
-              color: kWhite,
-              boxShadow: [
-                BoxShadow(
-                  color: kDarkBlue.withOpacity(0.051),
-                  offset: const Offset(0.0, 3.0),
-                  blurRadius: 24.0,
-                  spreadRadius: 0.0,
-                )
-              ],
-            ),
-            child: Column(children: [
-              Container(
-                height: 164,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(kBorderRadius),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://www.mafamillezen.com/w2018/wp-content/uploads/2022/02/voyage-famille-alger.jpg'))),
-              ),
-              const SizedBox(height: 18),
-              Flexible(
-                child: Text(
-                  'The Kasbah is a unique kind of medina, or Islamic city. It stands in one of the finest coastal sites on the Mediterranean',
-                  style: kPoppinsBold.copyWith(
-                    fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              hSizedBox(16.00),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 19,
-                        backgroundColor: kLightBlue,
-                        backgroundImage: NetworkImage(
-                            'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'),
-                      ),
-                      wSizedBox(12.00),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Abdelhak Mehda',
-                            style: kPoppinsBold.copyWith(
-                              fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            ),
-                          ),
-                          Text(
-                            'April 18, 2023',
-                            style: kPoppinsRegular.copyWith(
-                              color: kGrey,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 38,
-                    width: 38,
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kBorderRadius),
-                      color: kLightWhite,
-                    ),
-                    child: SvgPicture.asset(
-                      'assets/share.svg',
-                      colorFilter:
-                          const ColorFilter.mode(kLightBlue, BlendMode.srcIn),
-                    ),
-                  ),
+  GestureDetector destinationList(ctx) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          ctx,
+          MaterialPageRoute(builder: (context) => NewsDetails()),
+        );
+      },
+      child: SizedBox(
+        height: 304,
+        child: ListView.builder(
+          itemCount: 6,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (ctx, index) {
+            return Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(right: 20.0),
+              height: 304,
+              width: 255,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kBorderRadius),
+                color: kWhite,
+                boxShadow: [
+                  BoxShadow(
+                    color: kDarkBlue.withOpacity(0.051),
+                    offset: const Offset(0.0, 3.0),
+                    blurRadius: 24.0,
+                    spreadRadius: 0.0,
+                  )
                 ],
               ),
-            ]),
-          );
-        },
+              child: Column(children: [
+                Container(
+                  height: 164,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kBorderRadius),
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://www.mafamillezen.com/w2018/wp-content/uploads/2022/02/voyage-famille-alger.jpg'))),
+                ),
+                const SizedBox(height: 18),
+                Flexible(
+                  child: Text(
+                    'The Kasbah is a unique kind of medina, or Islamic city. It stands in one of the finest coastal sites on the Mediterranean',
+                    style: kPoppinsBold.copyWith(
+                      fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                hSizedBox(16.00),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 19,
+                          backgroundColor: kLightBlue,
+                          backgroundImage: NetworkImage(
+                              'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'),
+                        ),
+                        wSizedBox(12.00),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Abdelhak Mehda',
+                              style: kPoppinsBold.copyWith(
+                                fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                              ),
+                            ),
+                            Text(
+                              'April 18, 2023',
+                              style: kPoppinsRegular.copyWith(
+                                color: kGrey,
+                                fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 38,
+                      width: 38,
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(kBorderRadius),
+                        color: kLightWhite,
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/share.svg',
+                        colorFilter:
+                            const ColorFilter.mode(kLightBlue, BlendMode.srcIn),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            );
+          },
+        ),
       ),
     );
   }

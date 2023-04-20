@@ -4,6 +4,12 @@ import 'package:travel_news_app/app_styles.dart';
 import 'package:travel_news_app/size_config.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+final List<String> imageList = [
+  'https://alger.mta.gov.dz/wp-content/uploads/sites/6/2022/01/La-casbah-dAlger.jpg',
+  'https://whc.unesco.org/uploads/thumbs/site_0565_0011-750-750-20180730112529.jpg',
+  'https://whc.unesco.org/uploads/thumbs/site_0565_0004-1000-1333-20180730112515.jpg',
+];
+
 class NewsDetails extends StatelessWidget {
   const NewsDetails({super.key});
 
@@ -11,31 +17,96 @@ class NewsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Stack(
+    return SafeArea(
+      child: Stack(
+        // alignment: Alignment.bottomCenter,
+        children: [
+          const FullSceenSlider(),
+          details(),
+        ],
+      ),
+    );
+  }
+
+  Align details() {
+    return Align(
       alignment: Alignment.bottomCenter,
-      children: [
-        const FullSceenSlider(),
-        Container(
-          width: double.infinity,
-          height: 40,
-          decoration: const BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(42),
-                topRight: Radius.circular(42),
-              )),
-          child: Text('d;lsdkf;lksfjgl;kfdgldfkjgdfslkgjata'),
+      child: Container(
+        width: double.infinity,
+        height: SizeConfig.blockSizeVertical! * 45,
+        decoration: const BoxDecoration(
+            color: kWhite,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(42),
+              topRight: Radius.circular(42),
+            )),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 27, left: 30, right: 30),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Unravel mysteries of the Kasabah',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: kPoppinsBold.copyWith(
+                    fontSize: SizeConfig.blockSizeHorizontal! * 7,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 54,
+                  decoration: BoxDecoration(
+                    color: kWhite,
+                    border: Border.all(color: kGrey),
+                    borderRadius: BorderRadius.circular(22),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const CircleAvatar(
+                          radius: 19,
+                          // backgroundColor: kLightBlue,
+                          backgroundImage: NetworkImage(
+                              'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg'),
+                        ),
+                        const SizedBox(
+                          width: 13,
+                        ),
+                        Text(
+                          'Abdelhak Mehda   April 20,  8 min read',
+                          style: kPoppinsMedium.copyWith(
+                            color: kGrey,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 39,
+                ),
+                Text(
+                  'The Casbah (Arabic: قصبة, qasba, meaning citadel) is the citadel of Algiers in Algeria and the traditional quarter clustered around it. In 1992, the United Nations Educational, Scientific and Cultural Organization (UNESCO) proclaimed Kasbah of Algiers a World Cultural Heritage site.',
+                  style: kPoppinsMedium.copyWith(
+                      color: kGrey,
+                      fontSize: SizeConfig.blockSizeVertical! * 2),
+                ),
+              ],
+            ),
+          ),
         ),
-      ],
+      ),
     );
   }
 }
-
-final List<String> imageList = [
-  'https://alger.mta.gov.dz/wp-content/uploads/sites/6/2022/01/La-casbah-dAlger.jpg',
-  'https://whc.unesco.org/uploads/thumbs/site_0565_0011-750-750-20180730112529.jpg',
-  'https://whc.unesco.org/uploads/thumbs/site_0565_0004-1000-1333-20180730112515.jpg',
-];
 
 class FullSceenSlider extends StatefulWidget {
   const FullSceenSlider({super.key});
@@ -81,7 +152,7 @@ class _FullSceenSliderState extends State<FullSceenSlider> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Container(
               height: SizeConfig.blockSizeVertical! * 50,
-              padding: const EdgeInsets.only(top: 30, bottom: 50),
+              padding: const EdgeInsets.only(top: 30, bottom: 70),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,28 +162,9 @@ class _FullSceenSliderState extends State<FullSceenSlider> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: kWhite),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: const Icon(
-                            Icons.arrow_back_ios_outlined,
-                            color: kWhite,
-                          ),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: kWhite),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: const Icon(
-                            Icons.bookmark,
-                            color: kWhite,
-                          ),
-                        ),
+                        newsDetailsIcon(
+                            Icons.arrow_back_ios_outlined, () => null),
+                        newsDetailsIcon(Icons.bookmark, () => null),
                       ],
                     ),
                   ),
@@ -147,5 +199,22 @@ class _FullSceenSliderState extends State<FullSceenSlider> {
             ),
           )
         ]);
+  }
+
+  newsDetailsIcon(icon, action) {
+    return GestureDetector(
+      onTap: action,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: kWhite),
+            borderRadius: BorderRadius.circular(kBorderRadius)),
+        child: Icon(
+          icon,
+          color: kWhite,
+        ),
+      ),
+    );
   }
 }
