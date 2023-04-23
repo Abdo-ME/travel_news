@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_news_app/screens/home.dart';
 import 'package:travel_news_app/screens/news_details.dart';
+import 'package:travel_news_app/screens/profile.dart';
 import 'app_styles.dart';
 // import 'size_config.dart';
 // import 'package:flutter_svg/flutter_svg.dart';

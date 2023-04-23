@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_news_app/app_styles.dart';
 import 'package:travel_news_app/screens/news_details.dart';
+import 'package:travel_news_app/screens/profile.dart';
 import 'package:travel_news_app/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -146,7 +147,7 @@ class HomeScreen extends StatelessWidget {
       onTap: () {
         Navigator.push(
           ctx,
-          MaterialPageRoute(builder: (context) => NewsDetails()),
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
         );
       },
       child: SizedBox(
