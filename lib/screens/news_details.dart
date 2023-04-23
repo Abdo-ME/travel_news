@@ -17,13 +17,16 @@ class NewsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return SafeArea(
-      child: Stack(
-        // alignment: Alignment.bottomCenter,
-        children: [
-          const FullSceenSlider(),
-          details(),
-        ],
+    return Scaffold(
+      backgroundColor: kWhite,
+      body: SafeArea(
+        child: Stack(
+          // alignment: Alignment.bottomCenter,
+          children: [
+            const FullSceenSlider(),
+            details(),
+          ],
+        ),
       ),
     );
   }
@@ -33,7 +36,7 @@ class NewsDetails extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: double.infinity,
-        height: SizeConfig.blockSizeVertical! * 45,
+        height: SizeConfig.blockSizeVertical! * 54,
         decoration: const BoxDecoration(
             color: kWhite,
             borderRadius: BorderRadius.only(
@@ -162,8 +165,8 @@ class _FullSceenSliderState extends State<FullSceenSlider> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        newsDetailsIcon(
-                            Icons.arrow_back_ios_outlined, () => null),
+                        newsDetailsIcon(Icons.arrow_back_ios_outlined,
+                            () => Navigator.pop(context)),
                         newsDetailsIcon(Icons.bookmark, () => null),
                       ],
                     ),

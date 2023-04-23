@@ -1,9 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_news_app/app_styles.dart';
 import 'package:travel_news_app/size_config.dart';
 
@@ -18,6 +13,7 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -190,6 +186,109 @@ class ProfileScreen extends StatelessWidget {
                         fontSize: SizeConfig.blockSizeHorizontal! * 3),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 2.5,
+              ),
+              SizedBox(
+                height: 215,
+                child: ListView.builder(
+                    itemCount: 6,
+                    itemBuilder: (ctx, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: kWhite,
+                                  borderRadius:
+                                      BorderRadius.circular(kBorderRadius)),
+                              padding: const EdgeInsets.all(5),
+                              child: Container(
+                                height: 90,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                    color: kWhite,
+                                    borderRadius:
+                                        BorderRadius.circular(kBorderRadius),
+                                    image: const DecorationImage(
+                                      image: NetworkImage(
+                                        'https://www.algerie360.com/wp-content/uploads/2018/01/4.jpg',
+                                      ),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                            ),
+                            SizedBox(
+                              width: SizeConfig.blockSizeVertical! * 2,
+                            ),
+                            Flexible(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'News: Politics',
+                                    style: kPoppinsRegular.copyWith(
+                                      color: kGrey,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical! * 1,
+                                  ),
+                                  Text(
+                                    'El Oued (Arabic: اﻟﻮادي, Berber languages: Suf meaning the River), Souf or Oued Souf is a city, and the capital of El Oued Province,',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: kPoppinsBold.copyWith(
+                                      color: kDarkBlue,
+                                      fontSize:
+                                          SizeConfig.blockSizeVertical! * 1.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 2.5,
+              ),
+              Text(
+                'Populer From Abdelhak',
+                style: kPoppinsBold.copyWith(
+                    color: kDarkBlue,
+                    fontSize: SizeConfig.blockSizeHorizontal! * 4),
+              ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 2.5,
+              ),
+              SizedBox(
+                height: 143,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (cntx, index) {
+                      return Container(
+                        height: 143,
+                        width: 248,
+                        margin: const EdgeInsets.only(right: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            image: const DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    'https://agronomie.info/fr/wp-content/uploads/2021/04/wilaya20del-oued.jpg'))),
+                      );
+                    }),
               )
             ],
           ),

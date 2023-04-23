@@ -14,22 +14,24 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-        children: [
-          header(),
-          hSizedBox(30.00),
-          search(),
-          hSizedBox(15.00),
-          tags(),
-          hSizedBox(25.00),
-          destinationList(context),
-          hSizedBox(25.00),
-          shareWihYou(),
-          hSizedBox(15.00),
-          shareList()
-        ],
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+          children: [
+            header(context),
+            hSizedBox(30.00),
+            search(),
+            hSizedBox(15.00),
+            tags(),
+            hSizedBox(25.00),
+            destinationList(context),
+            hSizedBox(25.00),
+            shareWihYou(),
+            hSizedBox(15.00),
+            shareList()
+          ],
+        ),
       ),
     );
   }
@@ -147,7 +149,7 @@ class HomeScreen extends StatelessWidget {
       onTap: () {
         Navigator.push(
           ctx,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => const NewsDetails()),
         );
       },
       child: SizedBox(
@@ -187,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 18),
                 Flexible(
                   child: Text(
-                    'The Kasbah is a unique kind of medina, or Islamic city. It stands in one of the finest coastal sites on the Mediterranean',
+                    'Algeria is a North African country with a Mediterranean coastline and a Saharan desert interior. Many empires have left legacies here, such as the ancient Roman ruins in seaside Tipaza. In the capital, Algiers, Ottoman landmarks like circa-1612 Ketchaoua Mosque line the hillside Casbah quarter, with its narrow alleys and stairways. The city’s Neo-Byzantine basilica Notre Dame d’Afrique dates to French colonial rule',
                     style: kPoppinsBold.copyWith(
                       fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
                     ),
@@ -327,18 +329,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Row header() {
+  Row header(ctx) {
     return Row(
       children: [
-        Container(
-          height: 51,
-          width: 51,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kBorderRadius),
-            color: kLightBlue,
-            image: const DecorationImage(
-              image: NetworkImage(
-                  'https://cdn3d.iconscout.com/3d/premium/thumb/man-avatar-6299539-5187871.png'),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              ctx,
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            );
+          },
+          child: Container(
+            height: 51,
+            width: 51,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kBorderRadius),
+              color: kLightBlue,
+              image: const DecorationImage(
+                image: NetworkImage(
+                    'https://cdn3d.iconscout.com/3d/premium/thumb/man-avatar-6299539-5187871.png'),
+              ),
             ),
           ),
         ),
